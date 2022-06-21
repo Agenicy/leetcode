@@ -7,69 +7,83 @@ namespace Q1642
 {
 	public class Solution
 	{
-		class GapCounter
-		{
-			public int times = 0;
-			public int values = 0;
-			public GapCounter(int v, int t) { times = t; values = v; }
-		}
-
 		class GapHandler
 		{
+			List<int> heap;
 
-			LinkedList<GapCounter> allGap = new LinkedList<GapCounter>();
-			public void Add(int value)
+			public GapHandler(int size = 16)
 			{
-				if (allGap.Count == 0)
-				{
-					allGap.AddFirst(new LinkedListNode<GapCounter>(new GapCounter(value, 1)));
-				}
-				else
-				{
-					LinkedListNode<GapCounter> ind = allGap.First;
-					LinkedListNode<GapCounter> prev = null;
-					for (; ind.Value.values > value; ind = ind.Next)
-					{
-						prev = ind;
-						if (ind == allGap.Last)
-							break;
-					}
+				heap = new List<int>(size) { -1, -1 };
+			}
+			int root { get => heap[1]; set => heap[1] = value; }
 
-					if (ind.Value.values == value)
-						ind.Value.times++;
-					else if (ind.Value.values > value)
+			void Heapify(int index)
+			{
+				int parent = index / 2;
+				if(heap[parent] < heap[index])
+				{
+					(heap[parent], heap[index]) = (heap[index], heap[parent]);
+				}
+				if (parent > 1)
+					Heapify(parent);
+			}
+
+			void HeapifyTopDown(int index)
+			{
+				int left = index * 2;
+				int right = left + 1;
+
+				if(left < heap.Count && right < heap.Count && heap[left]!=-1 && heap[right] != -1)
+				{
+					if(heap[left] > heap[right])
 					{
-						// occurs at the end of list
-						allGap.AddAfter(ind, new LinkedListNode<GapCounter>(new GapCounter(value, 1)));
+						heap[index] = heap[left];
+						HeapifyTopDown(left);
 					}
 					else
 					{
-						if (prev == null)
-							allGap.AddFirst(new LinkedListNode<GapCounter>(new GapCounter(value, 1)));
-						else
-							allGap.AddAfter(prev, new LinkedListNode<GapCounter>(new GapCounter(value, 1)));
+						heap[index] = heap[right];
+						HeapifyTopDown(right);
 					}
+				}else if(left < heap.Count && heap[left] != -1)
+				{
+					heap[index] = heap[left];
+					HeapifyTopDown(left);
+				}
+				else if (right < heap.Count && heap[right] != -1)
+				{
+					heap[index] = heap[right];
+					HeapifyTopDown(right);
+				}
+				else
+				{
+					// no child
+					heap[index] = -1;
+				}
+
+			}
+
+			public void Add(int value)
+			{
+				if (root == -1)
+				{
+					root = value;
+				}
+				else
+				{
+					heap.Add(value);
+					Heapify(heap.Count - 1);
 				}
 			}
 
 			public int Peek()
 			{
-				if (allGap.Count > 0)
-					return allGap.First.Value.values;
-				else
-					return int.MinValue;
+				return root;
 			}
 
 			public void Pop()
 			{
-				if (allGap.First.Value.times > 1)
-				{
-					allGap.First.Value.times--;
-				}
-				else
-				{
-					allGap.RemoveFirst();
-				}
+				HeapifyTopDown(1);
 			}
 		}
 
@@ -78,7 +92,7 @@ namespace Q1642
 			int farthest = 0;
 			long leftLadder = ladders;
 			long leftBrick = bricks;
-			GapHandler gapHandler = new GapHandler();
+			GapHandler gapHandler = new GapHandler(heights.Length);
 
 			checked
 			{
