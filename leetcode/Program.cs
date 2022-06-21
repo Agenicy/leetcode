@@ -23,9 +23,10 @@ namespace leetcode
 			Console.WriteLine(solution.FurthestBuilding(new[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, 10, 2));
 			Console.WriteLine(solution.FurthestBuilding(new[] { 14, 3, 19, 3 }, 17, 0));
 			Console.WriteLine(solution.FurthestBuilding(new[] { 2, 7, 9, 12}, 5, 1));
-			Console.WriteLine("The answer should be 4/ 7/ 3/ 3");
+			Console.WriteLine(solution.FurthestBuilding(new[] { 1, 13, 1, 1, 13, 5, 11, 11 }, 10, 8));
+			Console.WriteLine("The answer should be 4/ 7/ 3/ 3/ 7");
 
-			/*
+			
 			string[] lines = System.IO.File.ReadAllLines("../../../testcase/1642/testcase1.txt");
 			List<int> vs = new List<int>();
 			foreach (var item in lines[0].Split(','))
@@ -33,7 +34,16 @@ namespace leetcode
 				vs.Add(int.Parse(item));
 			}
 			Console.WriteLine(solution.FurthestBuilding(vs.ToArray(), int.Parse(lines[1]), int.Parse(lines[2])));
-			Console.WriteLine("The answer should be 72329");*/
+			Console.WriteLine("The answer should be 72329");
+
+			lines = System.IO.File.ReadAllLines("../../../testcase/1642/testcase2.txt");
+			vs = new List<int>();
+			foreach (var item in lines[0].Split(','))
+			{
+				vs.Add(int.Parse(item));
+			}
+			Console.WriteLine(solution.FurthestBuilding(vs.ToArray(), int.Parse(lines[1]), int.Parse(lines[2])));
+			Console.WriteLine("The answer should be 589");
 #endif
 		}
 	}
