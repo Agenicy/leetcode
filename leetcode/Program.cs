@@ -21,6 +21,8 @@ namespace leetcode
 			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 1, 5, 6, 4 }, 2));
 			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
 			Console.WriteLine("The answer should be 5/ 4");
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+			Console.WriteLine("The answer should be 4");
 #elif Q820
 			Console.WriteLine(solution.MinimumLengthEncoding(new[] { "time", "me", "bell" }));
 #elif Q1642

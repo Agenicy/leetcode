@@ -43,14 +43,58 @@ namespace Q215
 				if ((sum + nodes[i].Count) >= k)
 				{
 					int ind = k - sum;
-
-					nodes[i].Sort((a, b) => b.CompareTo(a));
-					return nodes[i][ind - 1];
+					return QuickSelect(ref nodes[i], ind - 1);
 				}
 
 				sum += nodes[i].Count;
 			}
 			return int.MaxValue;
+		}
+
+		int QuickSelect(ref List<int> list, int ind)
+		{
+			int x = list[list.Count - 1];
+			int[] array = new int[list.Count];
+			int a = 0, b = list.Count - 1;
+			for (int i = 0; i < list.Count; i++)
+			{
+				if (list[i] > x)
+					array[a++] = list[i];
+				else
+					array[b--] = list[i];
+			}
+
+			if (a == ind)
+				return x;
+			else
+			{
+				if (a > ind)
+					return QuickSelect(ref array, 0, a, ind);
+				else
+					return QuickSelect(ref array, a, list.Count, ind);
+			}
+		}
+		int QuickSelect(ref int[] list, int from, int end, int ind)
+		{
+			int x = list[end - 1];
+			int[] array = new int[list.Length];
+			int a = from, b = end-1;
+			for (int i = from; i < end; i++)
+			{
+				if (list[i] > x)
+					array[a++] = list[i];
+				else
+					array[b--] = list[i];
+			}
+			if (a == ind)
+				return x;
+			else
+			{
+				if (a > ind)
+					return QuickSelect(ref array, from, a, ind);
+				else
+					return QuickSelect(ref array, a+1, end, ind);
+			}
 		}
 	}
 }
