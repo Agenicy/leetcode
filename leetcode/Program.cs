@@ -1,8 +1,10 @@
-﻿#define Q215
+﻿#define Q4
 
 using System;
 using System.Collections.Generic;
-#if Q215
+#if Q4
+using Q4;
+#elif Q215
 using Q215;
 #elif Q820
 using Q820;
@@ -17,7 +19,12 @@ namespace leetcode
 		static void Main(string[] args)
 		{
 			Solution solution = new Solution();
-#if Q215
+#if Q4
+			Console.WriteLine(solution.FindMedianSortedArrays(new[] { 1, 3 }, new[] { 2 }));
+			Console.WriteLine(solution.FindMedianSortedArrays(new[] { 1, 2 }, new[] { 3, 4 }));
+			Console.WriteLine(solution.FindMedianSortedArrays(new int[0] { }, new[] { 1 }));
+			Console.WriteLine("The answer should be 2.0/ 2.5/ 1");
+#elif Q215
 			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 1, 5, 6, 4 }, 2));
 			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
 			Console.WriteLine("The answer should be 5/ 4");
