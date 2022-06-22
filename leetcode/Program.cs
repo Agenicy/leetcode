@@ -1,9 +1,10 @@
-﻿#define Q1642
+﻿#define Q215
 
 using System;
 using System.Collections.Generic;
-
-#if Q820
+#if Q215
+using Q215;
+#elif Q820
 using Q820;
 #elif Q1642
 using Q1642;
@@ -16,7 +17,11 @@ namespace leetcode
 		static void Main(string[] args)
 		{
 			Solution solution = new Solution();
-#if Q820
+#if Q215
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 1, 5, 6, 4 }, 2));
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+			Console.WriteLine("The answer should be 5/ 4");
+#elif Q820
 			Console.WriteLine(solution.MinimumLengthEncoding(new[] { "time", "me", "bell" }));
 #elif Q1642
 			Console.WriteLine(solution.FurthestBuilding(new[] { 4, 2, 7, 6, 9, 14, 12 }, 5, 1));
