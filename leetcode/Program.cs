@@ -1,4 +1,4 @@
-﻿#define Q4
+﻿#define Q630
 
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Q4;
 #elif Q215
 using Q215;
+#elif Q630
+using Q630;
 #elif Q820
 using Q820;
 #elif Q1642
@@ -30,6 +32,13 @@ namespace leetcode
 			Console.WriteLine("The answer should be 5/ 4");
 			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
 			Console.WriteLine("The answer should be 4");
+#elif Q630
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[100, 200],[200, 1300],[1000, 1250],[2000, 3200]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[1,2]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[3,2],[4,3]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[1,2],[2,3]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[7,17],[3,12],[10,20],[9,10],[5,20],[10,19],[4,18]]")));
+			Console.WriteLine("The answer should be 3/ 1 /0/ 2/ 4");
 #elif Q820
 			Console.WriteLine(solution.MinimumLengthEncoding(new[] { "time", "me", "bell" }));
 #elif Q1642
