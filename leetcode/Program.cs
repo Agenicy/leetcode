@@ -1,4 +1,4 @@
-﻿#define Q1354
+﻿#define Q665
 
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,8 @@ using Q4;
 using Q215;
 #elif Q630
 using Q630;
+#elif Q665
+using Q665;
 #elif Q820
 using Q820;
 #elif Q1354
@@ -41,6 +43,13 @@ namespace leetcode
 			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[1,2],[2,3]]")));
 			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[7,17],[3,12],[10,20],[9,10],[5,20],[10,19],[4,18]]")));
 			Console.WriteLine("The answer should be 3/ 1 /0/ 2/ 4");
+#elif Q665
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[4,2,3]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[4,2,1]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[3,4,2,3]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[5, 7, 1, 8]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[-1, 4, 2, 3]")));
+			Console.WriteLine("The answer should be t/ f/ f/ t/ t");
 #elif Q820
 			Console.WriteLine(solution.MinimumLengthEncoding(new[] { "time", "me", "bell" }));
 #elif Q1354
