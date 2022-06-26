@@ -1,4 +1,4 @@
-﻿#define Q665
+﻿#define Q1423
 
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,8 @@ using Q665;
 using Q820;
 #elif Q1354
 using Q1354;
+#elif Q1423
+using Q1423;
 #elif Q1642
 using Q1642;
 #endif
@@ -108,6 +110,12 @@ namespace leetcode
 				"419140747,159588938,347014008,185777438,568372321,493787170,977773677,280401477,450031484," +
 				"864875906,875968901,91527892,801552770,604341036,664123503,856509396,167598401,247439177,315157371]")));
 			Console.WriteLine("The answer should be t/ f/ t/ t/ t/ t/ f");
+#elif Q1423
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[1,2,3,4,5,6,1]"), 3));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[2,2,2]"), 2));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[9,7,7,9,7,7,9]"), 7));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[100, 40, 17, 9, 73, 75]"), 3));
+			Console.WriteLine("The answer should be 12/ 4/ 55/ 248");
 #elif Q1642
 			Console.WriteLine(solution.FurthestBuilding(new[] { 4, 2, 7, 6, 9, 14, 12 }, 5, 1));
 			Console.WriteLine(solution.FurthestBuilding(new[] { 4, 12, 2, 7, 3, 18, 20, 3, 19 }, 10, 2));
