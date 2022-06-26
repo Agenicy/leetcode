@@ -38,9 +38,7 @@ namespace Q1423
 				return s;
 			}
 
-			int max = int.MinValue;
-			k++; // add axis, index plus 1
-			int[] cardGraph = new int[k]; // in-place memory usage
+			int mem = 0; // in-place memory usage
 			/*
 			 * 12
 			 * 8
@@ -49,16 +47,13 @@ namespace Q1423
 			 */
 			for (int j = 0; j < k; j++)
 			{
-				if (j == 0)
-					cardGraph[j] = 0;
-				else
-					cardGraph[j] = cardPoints[j - 1] + cardGraph[j - 1];
-				max = Math.Max(max, cardGraph[j]);
+				mem += cardPoints[j];
 			}
-			for (int j = k - 2, i = 1; j >= 0; j--, i++)
+			int max = mem;
+			for (int j = k - 1, i = 1; j >= 0; j--, i++)
 			{
-				cardGraph[j] = cardGraph[j+1] - cardPoints[j] + cardPoints[cardPoints.Length - i];
-				max = Math.Max(max, cardGraph[j]);
+				mem = mem - cardPoints[j] + cardPoints[cardPoints.Length - i];
+				max = Math.Max(max, mem);
 			}
 			return max;
 		}
