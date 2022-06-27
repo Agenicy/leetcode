@@ -1,4 +1,5 @@
-﻿#define Q1423
+﻿#define Q1689
+#define Q1689
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ using Q1354;
 using Q1423;
 #elif Q1642
 using Q1642;
+#elif Q1689
+using Q1689;
 #endif
 
 namespace leetcode
@@ -142,6 +145,11 @@ namespace leetcode
 			}
 			Console.WriteLine(solution.FurthestBuilding(vs.ToArray(), int.Parse(lines[1]), int.Parse(lines[2])));
 			Console.WriteLine("The answer should be 589");
+#elif Q1689
+
+			Console.WriteLine(solution.MinPartitions("32"));
+			Console.WriteLine(solution.MinPartitions("82734"));
+			Console.WriteLine("The answer should be 3/ 8");
 #endif
 		}
 	}
