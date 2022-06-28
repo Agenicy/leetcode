@@ -1,5 +1,4 @@
-﻿#define Q1689
-#define Q1689
+﻿#define Q1647
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +18,8 @@ using Q1354;
 using Q1423;
 #elif Q1642
 using Q1642;
+#elif Q1647
+using Q1647;
 #elif Q1689
 using Q1689;
 #endif
@@ -145,6 +146,13 @@ namespace leetcode
 			}
 			Console.WriteLine(solution.FurthestBuilding(vs.ToArray(), int.Parse(lines[1]), int.Parse(lines[2])));
 			Console.WriteLine("The answer should be 589");
+#elif Q1647
+			Console.WriteLine(solution.MinDeletions("bddddabbb"));
+			Console.WriteLine(solution.MinDeletions("aab"));
+			Console.WriteLine(solution.MinDeletions("aaabbbcc"));
+			Console.WriteLine(solution.MinDeletions("ceabaacb"));
+			Console.WriteLine(solution.MinDeletions("accdcdadddbaadbc"));
+			Console.WriteLine("The answer should be 1/ 0/ 2/ 2/ 1");
 #elif Q1689
 
 			Console.WriteLine(solution.MinPartitions("32"));
