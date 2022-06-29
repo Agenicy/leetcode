@@ -56,51 +56,39 @@ namespace leetcode.Q406
 			 * 1 <= people.length <= 2000
 			 * 0 <= hi <= 10^6
 			 * 0 <= ki < people.length*/
-			PriorityQueue<People, int> priorityQueue = new PriorityQueue<People, int>();
+			PriorityQueue<int[], int> priorityQueue = new PriorityQueue<int[], int>();
 			foreach (var p in people)
 			{
-				priorityQueue.Enqueue(new People(p[0], p[1]), p[0] *2048 + p[1]);
+				priorityQueue.Enqueue(new int[] { p[0], p[1] }, p[0] *2048 + p[1]);
 			}
 			List<int> orders = new List<int>(people.Length);
 			for (int i = 0; i < people.Length; i++)
 			{
 				orders.Add(i);
 			}
-			int last = 0;
+			int last = -1;
 			int cnt = 0;
 			while (priorityQueue.Count > 0)
 			{
 				var p = priorityQueue.Dequeue();
 				int place;
-				if (last == p.height)
+				if (last == p[0])
 				{
-					place = p.order - (++cnt);
+					place = p[1] - (++cnt);
 				}
 				else
 				{
 					cnt = 0;
-					last = p.height;
-					place = p.order;
+					last = p[0];
+					place = p[1];
 				}
 
-				people[orders[place]] = p.Result();
+				people[orders[place]] = p;
 				orders.RemoveAt(place);
 			}
 
 			return people;
 		}
 
-		class People
-		{
-			int[] Mem = new int[2];
-			public int height => Mem[0];
-			public int order => Mem[1];
-			public People(int height, int order)
-			{
-				Mem = new int[2] { height, order };
-			}
-
-			public int[] Result() => Mem;
-		}
 	}
 }
