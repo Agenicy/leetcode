@@ -1,8 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Q1647
+namespace leetcode.Q1647
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.MinDeletions("bddddabbb"));
+			Console.WriteLine(solution.MinDeletions("aab"));
+			Console.WriteLine(solution.MinDeletions("aaabbbcc"));
+			Console.WriteLine(solution.MinDeletions("ceabaacb"));
+			Console.WriteLine(solution.MinDeletions("accdcdadddbaadbc"));
+			Console.WriteLine("The answer should be 1/ 0/ 2/ 2/ 1");
+		}
+	}
 	public class Solution
 	{
 		public int MinDeletions(string s)

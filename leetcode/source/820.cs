@@ -1,8 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Q820
+namespace leetcode.Q820
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.MinimumLengthEncoding(new[] { "time", "me", "bell" }));
+		}
+	}
 	public class Solution
 	{
 		public int MinimumLengthEncoding(string[] words)

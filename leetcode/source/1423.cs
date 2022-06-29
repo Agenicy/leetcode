@@ -1,7 +1,19 @@
 ﻿using System;
 
-namespace Q1423
+namespace leetcode.Q1423
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[1,2,3,4,5,6,1]"), 3));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[2,2,2]"), 2));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[9,7,7,9,7,7,9]"), 7));
+			Console.WriteLine(solution.MaxScore(Parser.Parse("[100, 40, 17, 9, 73, 75]"), 3));
+			Console.WriteLine("The answer should be 12/ 4/ 55/ 248");
+		}
+	}
 	public class Parser
 	{
 		public static int[] Parse(string input)

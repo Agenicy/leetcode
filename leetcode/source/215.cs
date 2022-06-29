@@ -1,8 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Q215
+namespace leetcode.Q215
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 1, 5, 6, 4 }, 2));
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+			Console.WriteLine("The answer should be 5/ 4");
+			Console.WriteLine(solution.FindKthLargest(new[] { 3, 2, 3, 1, 2, 4, 5, 5, 6 }, 4));
+			Console.WriteLine("The answer should be 4");
+		}
+	}
 	public class Solution
 	{
 		/// <summary>
@@ -78,7 +90,7 @@ namespace Q215
 		{
 			int x = list[end - 1];
 			int[] array = new int[list.Length];
-			int a = from, b = end-1;
+			int a = from, b = end - 1;
 			for (int i = from; i < end; i++)
 			{
 				if (list[i] > x)
@@ -93,7 +105,7 @@ namespace Q215
 				if (a > ind)
 					return QuickSelect(ref array, from, a, ind);
 				else
-					return QuickSelect(ref array, a+1, end, ind);
+					return QuickSelect(ref array, a + 1, end, ind);
 			}
 		}
 	}

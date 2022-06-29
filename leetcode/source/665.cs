@@ -1,7 +1,21 @@
 ﻿using System;
 
-namespace Q665
+namespace leetcode.Q665
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[4,2,3]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[4,2,1]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[3,4,2,3]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[5, 7, 1, 8]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[-1, 4, 2, 3]")));
+			Console.WriteLine(solution.CheckPossibility(Parser.Parse("[1, 4,1,2]")));
+			Console.WriteLine("The answer should be t/ f/ f/ t/ t/ t");
+		}
+	}
 	public class Parser
 	{
 		public static int[] Parse(string input)

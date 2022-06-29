@@ -1,7 +1,19 @@
 ﻿using System;
 
-namespace Q4
+namespace leetcode.Q4
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.FindMedianSortedArrays(new[] { 1, 3 }, new[] { 2 }));
+			Console.WriteLine(solution.FindMedianSortedArrays(new[] { 1, 2 }, new[] { 3, 4 }));
+			Console.WriteLine(solution.FindMedianSortedArrays(new int[0] { }, new[] { 1 }));
+			Console.WriteLine("The answer should be 2.0/ 2.5/ 1");
+		}
+	}
+
 	public class Solution
 	{
 		public double FindMedianSortedArrays(int[] nums1, int[] nums2)

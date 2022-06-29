@@ -1,8 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Q630
+namespace leetcode.Q630
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[100, 200],[200, 1300],[1000, 1250],[2000, 3200]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[1,2]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[3,2],[4,3]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[1,2],[2,3]]")));
+			Console.WriteLine(solution.ScheduleCourse(Parser.Parse("[[7,17],[3,12],[10,20],[9,10],[5,20],[10,19],[4,18]]")));
+			Console.WriteLine("The answer should be 3/ 1 /0/ 2/ 4");
+		}
+	}
 	public class Parser
 	{
 		public static int[][] Parse(string input)

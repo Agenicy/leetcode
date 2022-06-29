@@ -1,7 +1,18 @@
 ﻿using System;
 
-namespace Q1689
+namespace leetcode.Q1689
 {
+	public class Program
+	{
+		public static void Run()
+		{
+			Solution solution = new Solution();
+
+			Console.WriteLine(solution.MinPartitions("32"));
+			Console.WriteLine(solution.MinPartitions("82734"));
+			Console.WriteLine("The answer should be 3/ 8");
+		}
+	}
 	public class Solution
 	{
 		public int MinPartitions(string n)
