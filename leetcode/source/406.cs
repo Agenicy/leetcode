@@ -59,36 +59,32 @@ namespace leetcode.Q406
 			PriorityQueue<int[], int> priorityQueue = new PriorityQueue<int[], int>();
 			foreach (var p in people)
 			{
-				priorityQueue.Enqueue(new int[] { p[0], p[1] }, -p[0] *2048 + p[1]);
+				priorityQueue.Enqueue(new int[] { p[0], p[1] }, p[0] *2048 + p[1]);
 			}
-			LinkedList<int[]> queue = new LinkedList<int[]>();
-
+			List<int> orders = new List<int>(people.Length);
+			for (int i = 0; i < people.Length; i++)
+			{
+				orders.Add(i);
+			}
+			int last = -1;
+			int cnt = 0;
 			while (priorityQueue.Count > 0)
 			{
 				var p = priorityQueue.Dequeue();
-				int place = p[1];
-
-				var cur = queue.First;
-				if(place == 0)
-					queue.AddFirst(new LinkedListNode<int[]>(p));
-				else if (place == queue.Count)
-					queue.AddLast(new LinkedListNode<int[]>(p));
+				int place;
+				if (last == p[0])
+				{
+					place = p[1] - (++cnt);
+				}
 				else
 				{
-					for (int i = 1; i < place; i++)
-					{
-						cur = cur.Next;
-					}
-					queue.AddAfter(cur, new LinkedListNode<int[]>(p));
+					cnt = 0;
+					last = p[0];
+					place = p[1];
 				}
-			}
 
-
-			var curr = queue.First;
-			for (int i = 0; i < people.Length; i++)
-			{
-				people[i] = curr.Value;
-				curr = curr.Next;
+				people[orders[place]] = p;
+				orders.RemoveAt(place);
 			}
 
 			return people;
