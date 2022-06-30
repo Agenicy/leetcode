@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace leetcode.Q462
 {
@@ -34,64 +35,8 @@ namespace leetcode.Q462
 	{
 		public int MinMoves2(int[] nums)
 		{
-			int center = QuickSelect(ref nums, nums.Length / 2);
-
-			int sum = 0;
-			checked
-			{
-				for (int i = 0; i < nums.Length; i++)
-				{
-					sum += Math.Abs(center - nums[i]);
-					//int s = Math.Abs(center - nums[i]); ;
-					//sum += s;
-				}
-			}
-			return sum;
-		}
-		int QuickSelect(ref int[] list, int ind)
-		{
-			int x = list[list.Length - 1];
-			int[] array = new int[list.Length];
-			int a = 0, b = list.Length - 1;
-			for (int i = 0; i < list.Length; i++)
-			{
-				if (list[i] > x)
-					array[a++] = list[i];
-				else
-					array[b--] = list[i];
-			}
-
-			if (a == ind)
-				return x;
-			else
-			{
-				if (a > ind)
-					return QuickSelect(ref array, 0, a, ind);
-				else
-					return QuickSelect(ref array, a, list.Length, ind);
-			}
-		}
-		int QuickSelect(ref int[] list, int from, int end, int ind)
-		{
-			int x = list[end - 1];
-			int[] array = new int[list.Length];
-			int a = from, b = end - 1;
-			for (int i = from; i < end; i++)
-			{
-				if (list[i] > x)
-					array[a++] = list[i];
-				else
-					array[b--] = list[i];
-			}
-			if (a == ind)
-				return x;
-			else
-			{
-				if (a > ind)
-					return QuickSelect(ref array, from, a, ind);
-				else
-					return QuickSelect(ref array, a + 1, end, ind);
-			}
+			Array.Sort(nums);
+			return nums.Sum(x => Math.Abs(x - nums[nums.Length / 2]));
 		}
 	}
 }
