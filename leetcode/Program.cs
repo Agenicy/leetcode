@@ -7,7 +7,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q462.Program.Run();
+			Q1710.Program.Run();
 		}
 	}
 
