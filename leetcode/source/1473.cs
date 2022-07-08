@@ -88,7 +88,14 @@ namespace leetcode.Q1473
 
 						if (k > 0)
 						{
-							int oldMinWithDiffColor = Enumerable.Range(0, n).Where(x => x != j).Min(x => dp[i - 1, x, k - 1]);
+							int oldMinWithDiffColor = int.MaxValue;
+
+							for (int x = 0; x < n; x++)
+							{
+								if (x == j) continue;
+
+								oldMinWithDiffColor = Math.Min(oldMinWithDiffColor, dp[i - 1, x, k - 1]);
+							}
 							int oldMin = (oldMinWithDiffColor == int.MaxValue) ? int.MaxValue : add ? oldMinWithDiffColor + cost[i][j] : oldMinWithDiffColor;
 							// different color
 							dp[i, j, k] = Math.Min(oldMin, dp[i, j, k]);
@@ -109,7 +116,12 @@ namespace leetcode.Q1473
 					}
 				}
 			}
-			int ans = Enumerable.Range(0, n).Min(x => dp[m - 1, x, target - 1]);
+
+			int ans = int.MaxValue;
+			for (int x = 0; x < n; x++)
+			{
+				ans = Math.Min(ans, dp[m - 1, x, target - 1]);
+			}
 			if (ans == int.MaxValue)
 				return -1;
 			else return ans;
