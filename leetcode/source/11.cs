@@ -38,9 +38,8 @@ namespace leetcode.Q11
 			int lq = (right - left) * Math.Min(height[left], height[right]);
 			while(left < right)
 			{
-				var lqNext = (right - left) * Math.Min(height[left], height[right]); ;
-				if (lqNext > lq)
-					lq = lqNext;
+				var lqNext = (right - left) * Math.Min(height[left], height[right]);
+				lq = Math.Max(lq, lqNext);
 				if (height[left] < height[right])
 					left++;
 				else
