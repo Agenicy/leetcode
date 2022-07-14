@@ -7,7 +7,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q11.Program.Run();
+			Q105.Program.Run();
 		}
 	}
 
@@ -21,6 +21,35 @@ namespace leetcode
 			this.val = val;
 			this.left = left;
 			this.right = right;
+		}
+
+		public static void Preorder(TreeNode root)
+		{
+			if (root == null)
+				Console.WriteLine("[null]");
+			else
+			{
+				Console.Write("[" + root.val.ToString());
+				Queue<TreeNode> treeNodes = new Queue<TreeNode>();
+				treeNodes.Enqueue(root.left);
+				treeNodes.Enqueue(root.right);
+
+				while (treeNodes.Count > 0)
+				{
+					var next = treeNodes.Dequeue();
+					if (next == null)
+					{
+						Console.Write(",null");
+					}
+					else
+					{
+						Console.Write("," + next.val.ToString());
+						treeNodes.Enqueue(next.left);
+						treeNodes.Enqueue(next.right);
+					}
+				}
+				Console.Write("]\n");
+			}
 		}
 	}
 }
