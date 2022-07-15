@@ -10,13 +10,15 @@ namespace leetcode.Q695
 		{
 			Solution solution = new Solution();
 
+			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[0, 1, 1],[1, 1, 1]]")));
 			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[1,1,0],[1,1,1]]")));
 			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[1,1],[1,0]]")));
 			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]")));
+
 			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[0,0,1,0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,1,1,0,1,0,0,0,0,0,0,0,0],[0,1,0,0,1,1,0,0,1,0,1,0,0],[0,1,0,0,1,1,0,0,1,1,1,0,0],[0,0,0,0,0,0,0,0,0,0,1,0,0],[0,0,0,0,0,0,0,1,1,1,0,0,0],[0,0,0,0,0,0,0,1,1,0,0,0,0]]")));
 			Console.WriteLine(solution.MaxAreaOfIsland(Parser.ParseArr2D("[[0,0,0,0,0,0,0,0]]")));
 
-			Console.WriteLine("The answer should be 5/ 3/ 4/ 6/ 0");
+			Console.WriteLine("The answer should be 5/ 5/ 3/ 4/ 6/ 0");
 		}
 	}
 	public class Parser
@@ -52,6 +54,7 @@ namespace leetcode.Q695
 		{
 			int[,] hash = new int[grid.Length + 1, grid[0].Length + 1];
 			Dictionary<int, int> map = new Dictionary<int, int>();
+			Dictionary<int, int> hashTrans = new Dictionary<int, int>();
 			for (int i = 1; i < hash.GetLength(0); i++)
 			{
 				for (int j = 1; j < hash.GetLength(1); j++)
@@ -63,41 +66,33 @@ namespace leetcode.Q695
 							hash[i, j] = i * 200 + j;
 							map[hash[i, j]] = 1;
 						}
-						else if (hash[i - 1, j] == 0 && hash[i, j - 1] > 0)
-						{
-							hash[i, j] = hash[i, j - 1];
-							map[hash[i, j]]++;
-						}
-						else if (hash[i, j - 1] == 0 && hash[i - 1, j] > 0)
-						{
-							hash[i, j] = hash[i - 1, j];
-							map[hash[i, j]]++;
-						}
-						else if (hash[i - 1, j] == hash[i, j - 1])
-						{
-							hash[i, j] = hash[i - 1, j];
-							map[hash[i - 1, j]]++;
-						}
 						else
 						{
-							// hash not match
-							/* 1 0 1
-							 * 1 1 [1]
-							 */
-							hash[i, j] = i * 200 + j;
-							map[hash[i, j]] = map[hash[i - 1, j]] + map[hash[i, j - 1]] + 1;
-							int last1 = hash[i, j - 1];
-							int last2 = hash[i - 1, j];
-							for (int x = 1; x <= i; x++)
+							int newhash1 = hash[i - 1, j];
+							while (hashTrans.ContainsKey(newhash1)) newhash1 = hashTrans[newhash1];
+							int newhash2 = hash[i, j - 1];
+							while (hashTrans.ContainsKey(newhash2)) newhash2 = hashTrans[newhash2];
+
+							if (newhash1 == 0 && newhash2 > 0)
 							{
-								for (int y = 1; y < hash.GetLength(1); y++)
-								{
-									if (hash[x, y] == last1
-									|| hash[x, y] == last2)
-									{
-										hash[x, y] = hash[i, j];
-									}
-								}
+								hash[i, j] = newhash2;
+								map[newhash2]++;
+							}
+							else if ((newhash2 == 0 && newhash1 > 0) || (newhash1 == newhash2))
+							{
+								hash[i, j] = newhash1;
+								map[newhash1]++;
+							}
+							else
+							{
+								// hash not match
+								/* 1 0 1
+								 * 1 1 [1]
+								 */
+								hash[i, j] = i * 200 + j;
+								map[hash[i, j]] = map[newhash1] + map[newhash2] + 1;
+
+								hashTrans[newhash1] = hashTrans[newhash2] = hash[i, j];
 							}
 						}
 					}
