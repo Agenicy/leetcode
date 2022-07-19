@@ -20,18 +20,6 @@ namespace leetcode.Q5
 			Console.WriteLine("The answer should be  cabacabac");
 		}
 
-		public static void Print(int[,] arr)
-		{
-			var rowCount = arr.GetLength(0);
-			var colCount = arr.GetLength(1);
-			for (int row = 0; row < rowCount; row++)
-			{
-				for (int col = 0; col < colCount; col++)
-					Console.Write(String.Format("{0} ", arr[row, col]));
-				Console.WriteLine();
-			}
-			Console.WriteLine();
-		}
 	}
 	public class Solution
 	{

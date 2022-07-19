@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace leetcode
 {
@@ -7,7 +8,90 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q1074.Program.Run();
+			Q118.Program.Run();
+		}
+	}
+
+	public class Parser
+	{
+		public static int[] ParseArr1D(string input)
+		{
+			System.Collections.Generic.List<int> list = new System.Collections.Generic.List<int>();
+			input = input.Replace(" ", "").Replace("[", "").Replace("]", "");
+			var array = input.Split(',');
+			for (int i = 0; i < array.Length; i += 1)
+			{
+				list.Add(int.Parse(array[i]));
+			}
+			return list.ToArray();
+		}
+		public static int[][] ParseArr2D(string input)
+		{
+			List<int[]> ret = new List<int[]>();
+			input = input.Replace(" ", "");
+			input = input.Substring(2, input.Length - 3);
+			foreach (var s in input.Replace("],", "").Replace("]", "").Split("["))
+			{
+				string[] array = s.Split(',');
+				var list = new List<int>(Enumerable.Range(0, array.Length).Select(x => int.Parse(array[x])));
+				ret.Add(list.ToArray());
+			}
+			return ret.ToArray();
+		}
+
+	}
+
+	public class Log
+	{
+		public static void Print(string s) => Console.WriteLine(s);
+		public static void Print(int s) => Console.WriteLine(s);
+
+		public static void Print(int[] arr)
+		{
+			var rowCount = arr.GetLength(0);
+			Console.Write("[");
+			for (int row = 0; row < rowCount; row++)
+			{
+				Console.Write(String.Format("{0} ", arr[row]));
+			}
+			Console.Write("]");
+			Console.WriteLine();
+		}
+
+		public static void Print(int[,] arr)
+		{
+			var rowCount = arr.GetLength(0);
+			var colCount = arr.GetLength(1);
+			for (int row = 0; row < rowCount; row++)
+			{
+				for (int col = 0; col < colCount; col++)
+					Console.Write(String.Format("{0} ", arr[row, col]));
+				Console.WriteLine();
+			}
+			Console.WriteLine();
+		}
+		public static void Print(IList<int> arr)
+		{
+			var rowCount = arr.Count();
+			Console.Write("[");
+			for (int row = 0; row < rowCount; row++)
+			{
+				Console.Write(String.Format("{0} ", arr[row]));
+			}
+			Console.Write("]");
+			Console.WriteLine();
+		}
+		public static void Print(IList<IList<int>> arr)
+		{
+			foreach (var row in arr)
+			{
+				Console.Write("[");
+				foreach (var col in row)
+					Console.Write(String.Format("{0} ", col));
+				Console.Write("]");
+				Console.WriteLine();
+			}
+			Console.WriteLine();
 		}
 	}
 
