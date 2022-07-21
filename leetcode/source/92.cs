@@ -18,13 +18,14 @@ namespace leetcode.Q92
 	{
 		public ListNode ReverseBetween(ListNode head, int left, int right)
 		{
+			if (left == right) return head;
 			Stack<int> stack = new Stack<int>();
 			ListNode next = head;
-			ListNode last = null;
+			ListNode last = head;
 			int ind = 1;
 			while (next != null)
 			{
-				if(ind >= left && ind <= right)
+				if (ind >= left && ind <= right)
 				{
 					stack.Push(next.val);
 					next = next.next;
@@ -33,13 +34,14 @@ namespace leetcode.Q92
 				{
 					last = next = next.next;
 				}
-				if(ind == right)
+				if (ind == right)
 				{
-					foreach (var node in stack.Reverse())
+					while (stack.Count > 0)
 					{
-						var n = new ListNode(node);
-						last.next = n;
-						next = last = n;
+						var n = stack.Pop();
+
+						last.val = n;
+						last = last.next;
 					}
 				}
 				++ind;
