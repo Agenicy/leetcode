@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q792.Program.Run();
+			Q86.Program.Run();
 		}
 	}
 
@@ -145,6 +145,26 @@ namespace leetcode
 		{
 			this.val = val;
 			this.next = next;
+		}
+
+		public static ListNode Build(int[] ints)
+		{
+			ListNode listNode = new ListNode(ints[0]);
+			ListNode last = listNode;
+
+			for (int i = 1; i < ints.Length; i++)
+			{
+				last.next = new ListNode(ints[i]);
+				last = last.next;
+			}
+			return listNode;
+		}
+
+		public override string ToString()
+		{
+			if (next != null)
+				return val.ToString() + next.ToString();
+			else return val.ToString();
 		}
 	}
 }
