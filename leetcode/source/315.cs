@@ -22,36 +22,69 @@ namespace leetcode.Q315
 	}
 	public class Solution
 	{
+		class Node
+		{
+			public int idx;
+			public int val;
+			public Node(int val, int idx)
+			{
+				this.val = val;
+				this.idx = idx;
+			}
+		}
 		public IList<int> CountSmaller(int[] nums)
 		{
-			LinkedList<int> sortedList = new();
-			sortedList.AddFirst(nums[nums.Length - 1]);
-			Stack<int> stack = new Stack<int>();
-			stack.Push(0);
-			for (int i = nums.Length - 2; i >= 0; i--)
+			Node[] nodes = new Node[nums.Length];
+			for (int i = 0; i < nums.Length; i++)
 			{
-				int next = nums[i];
+				nodes[i] = new Node(nums[i], i);
+			}
 
-				LinkedListNode<int> now = sortedList.First;
-				int ind = 0;
-				while (now != null)
+			int[] result = new int[nums.Length];
+			MergeSortAndCount(nodes, 0, nums.Length - 1, result);
+
+			return result;
+		}
+
+		void MergeSortAndCount(Node[] nodes, int start, int end, int[] result)
+		{
+			if (start >= end) return;
+
+			int mid = (start + end) / 2;
+			MergeSortAndCount(nodes, start, mid, result);
+			MergeSortAndCount(nodes, mid + 1, end, result);
+
+			int left = start, right = mid + 1;
+			int lessThan = 0;
+			List<Node> merged = new List<Node>(end - start + 1);
+			while (left <= mid && right <= end)
+			{
+				if (nodes[left].val > nodes[right].val)
 				{
-					if (now.Value >= next)
-					{
-						sortedList.AddBefore(now, next);
-						stack.Push(ind);
-						break;
-					}
-					now = now.Next;
-					ind++;
+					++lessThan;
+					merged.Add(nodes[right++]);
 				}
-				if (now == null)
+				else
 				{
-					sortedList.AddLast(next);
-					stack.Push(ind);
+					result[nodes[left].idx] += lessThan;
+					merged.Add(nodes[left++]);
 				}
 			}
-			return stack.ToList();
+			while(left <= mid)
+			{
+				result[nodes[left].idx] += lessThan;
+				merged.Add(nodes[left++]);
+			}
+			while (right <= end)
+			{
+				merged.Add(nodes[right++]);
+			}
+
+			//int pos = start;
+			foreach (var item in merged)
+			{
+				nodes[start++] = item;
+			}
 		}
 	}
 }
