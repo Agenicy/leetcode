@@ -8,10 +8,10 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q86.Program.Run();
+			Q315.Program.Run();
 		}
 	}
-
+	#region fold
 	public class Parser
 	{
 		public static int[] ParseArr1D(string input)
@@ -167,4 +167,5 @@ namespace leetcode
 			else return val.ToString();
 		}
 	}
+	#endregion
 }
