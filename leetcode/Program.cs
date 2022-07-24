@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q315.Program.Run();
+			Q240.Program.Run();
 		}
 	}
 	#region fold
@@ -43,6 +43,7 @@ namespace leetcode
 
 	public class Log
 	{
+		public static void Print(bool s) => Console.WriteLine(s);
 		public static void Print(string s) => Console.WriteLine(s);
 		public static void Print(int s) => Console.WriteLine(s);
 
