@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q823.Program.Run();
+			Q8.Program.Run();
 		}
 	}
 	#region fold
@@ -106,6 +106,7 @@ namespace leetcode
 			Console.Write("]");
 			Console.WriteLine();
 		}
+		public static void Print(TreeNode s) => TreeNode.Preorder(s);
 	}
 
 	public class TreeNode
@@ -148,6 +149,7 @@ namespace leetcode
 				Console.Write("]\n");
 			}
 		}
+
 	}
 
 	public class ListNode
