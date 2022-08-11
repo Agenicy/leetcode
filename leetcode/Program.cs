@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q8.Program.Run();
+			Q98.Program.Run();
 		}
 	}
 	#region fold
@@ -121,6 +121,37 @@ namespace leetcode
 			this.right = right;
 		}
 
+		public static TreeNode Build(string input)
+		{
+			List<int?> value = new() { null };
+			input = input.Replace(" ", "").Replace("[", "").Replace("]", "");
+			var array = input.Split(',');
+			for (int i = 0; i < array.Length; i += 1)
+			{
+				if (array[i] != "null")
+					value.Add(int.Parse(array[i]));
+				else
+					value.Add(null);
+			}
+
+			TreeNode[] temp = new TreeNode[value.Count];
+			for (int i = 1; i < value.Count; i++)
+			{
+				if(value[i] != null)
+					temp[i] = new TreeNode((int)value[i]);
+				else
+					temp[i] = null;
+			}
+			for (int i = 1; i < value.Count / 2; i++)
+			{
+				if (i * 2 < value.Count)
+					temp[i].left = temp[i * 2];
+				if (i * 2 + 1 < value.Count)
+					temp[i].right = temp[i * 2 + 1];
+			}
+			return temp[1];
+		}
+
 		public static void Preorder(TreeNode root)
 		{
 			if (root == null)
@@ -150,6 +181,10 @@ namespace leetcode
 			}
 		}
 
+		public override string ToString()
+		{
+			return $"{val}, {left.val}, {right.val}";
+		}
 	}
 
 	public class ListNode
