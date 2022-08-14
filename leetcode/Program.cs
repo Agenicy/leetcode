@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q30.Program.Run();
+			Q126.Program.Run();
 		}
 	}
 	#region fold
@@ -83,6 +83,18 @@ namespace leetcode
 			Console.WriteLine();
 		}
 		public static void Print(IList<IList<int>> arr)
+		{
+			foreach (var row in arr)
+			{
+				Console.Write("[");
+				foreach (var col in row)
+					Console.Write(String.Format("{0} ", col));
+				Console.Write("]");
+				Console.WriteLine();
+			}
+			Console.WriteLine();
+		}
+		public static void Print(IList<IList<string>> arr)
 		{
 			foreach (var row in arr)
 			{
