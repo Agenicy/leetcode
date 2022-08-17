@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace leetcode.Q804
 {
@@ -25,13 +26,13 @@ namespace leetcode.Q804
 
 			for (int i = 0; i < words.Length; i++)
 			{
-				string word = "";
+				StringBuilder sb = new();
 				for (int j = 0; j < words[i].Length; j++)
 				{
 
-					word += map[words[i][j] - 'a'];
+					sb.Append(map[words[i][j] - 'a']);
 				}
-				result.Add(word);
+				result.Add(sb.ToString());
 			}
 			return result.Count;
 		}
