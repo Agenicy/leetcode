@@ -19,6 +19,7 @@ namespace leetcode.Q342
 
 		public bool IsPowerOfFour(int n)
 		{
+			if (n < 1) return false;
 			switch (n)
 			{
 				case 1:
