@@ -20,12 +20,23 @@ namespace leetcode.Q637
 		{
 			List<TreeNode> now = new() { root };
 			List<double> res = new();
+			double count;
 			while(now.Count > 0)
 			{
-				List<TreeNode> next = new() { root };
-				res.Add(next.Average(x=>x.val));
-
+				List<TreeNode> next = new() {};
+				count = 0;
+				foreach (var item in now)
+				{
+					count += item.val;
+					if (item.left != null)
+						next.Add(item.left);
+					if (item.right != null)
+						next.Add(item.right);
+				}
+				res.Add(count / now.Count);
+				now = next;
 			}
+			return res;
 		}
 	}
 }
