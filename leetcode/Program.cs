@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q967.Program.Run();
+			Q987.Program.Run();
 		}
 	}
 	#region fold
@@ -147,20 +147,23 @@ namespace leetcode
 			}
 
 			TreeNode[] temp = new TreeNode[value.Count];
-			for (int i = 1; i < value.Count; i++)
+			for (int i = 0; i < value.Count; i++)
 			{
 				if(value[i] != null)
 					temp[i] = new TreeNode((int)value[i]);
 				else
 					temp[i] = null;
 			}
-			for (int i = 1; i < value.Count / 2; i++)
+			int front = 1, last = 2;
+			while(last < value.Count)
 			{
-				if (i * 2 < value.Count)
-					temp[i].left = temp[i * 2];
-				if (i * 2 + 1 < value.Count)
-					temp[i].right = temp[i * 2 + 1];
+				while (temp[front] is null)
+					++front;
+
+				temp[front].left = temp[last++];
+				temp[front++].right = (last < value.Count)?temp[last++]:null;
 			}
+
 			return temp[1];
 		}
 
