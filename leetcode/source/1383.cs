@@ -34,26 +34,24 @@ namespace leetcode.Q1383
 
 			PriorityQueue<int, int> pq = new();
 
-			checked
+			for (int i = 0; i < n; i++)
 			{
-				for (int i = 0; i < n; i++)
+				if (pq.Count >= k)
 				{
-					if (pq.Count >= k)
-					{
-						teamSpd = teamSpd + wait[i].Item1 - pq.Peek();
-						pq.Dequeue();
-						pq.Enqueue(wait[i].Item1, wait[i].Item1);
-					}
-					else
-					{
-						teamSpd = teamSpd + wait[i].Item1;
-						pq.Enqueue(wait[i].Item1, wait[i].Item1);
-					}
-
-					maxValue = Math.Max(maxValue, teamSpd * wait[i].Item2);
+					teamSpd = teamSpd + wait[i].Item1 - pq.Peek();
+					pq.Dequeue();
+					pq.Enqueue(wait[i].Item1, wait[i].Item1);
+				}
+				else
+				{
+					teamSpd = teamSpd + wait[i].Item1;
+					pq.Enqueue(wait[i].Item1, wait[i].Item1);
 				}
 
+				maxValue = Math.Max(maxValue, teamSpd * wait[i].Item2);
 			}
+
+
 			return (int)(maxValue % mod);
 		}
 	}
