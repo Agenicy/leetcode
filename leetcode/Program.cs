@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q188.Program.Run();
+			Q1383.Program.Run();
 		}
 	}
 	#region fold
