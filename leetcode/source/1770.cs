@@ -20,7 +20,7 @@ namespace leetcode.Q1770
             Log.Print("The answer should be ");
         }
     }
-    public class Solution
+     public class Solution
     {
         public int MaximumScore(int[] nums, int[] multipliers)
         {
