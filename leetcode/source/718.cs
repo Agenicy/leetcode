@@ -21,7 +21,7 @@ namespace leetcode.Q718
 		{
 			int[,] dp = new int[nums1.Length, nums2.Length];
 
-			int max = int.MinValue;
+			int max = 0;
 			for (int i = 0; i < nums1.Length; i++)
 			{
 				for (int j = 0; j < nums2.Length; j++)
