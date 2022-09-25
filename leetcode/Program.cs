@@ -8,7 +8,7 @@ namespace leetcode
 	{
 		static void Main(string[] args)
 		{
-			Q113.Program.Run();
+			Q622.Program.Run();
 		}
 	}
 	#region fold
@@ -21,7 +21,24 @@ namespace leetcode
 			var array = input.Split(',');
 			for (int i = 0; i < array.Length; i += 1)
 			{
-				list.Add(int.Parse(array[i]));
+				if (array[i].Length > 0)
+					list.Add(int.Parse(array[i]));
+				else
+					list.Add(0);
+			}
+			return list.ToArray();
+		}
+		public static int?[] ParseArr1D_Nullable(string input)
+		{
+			System.Collections.Generic.List<int?> list = new();
+			input = input.Replace(" ", "").Replace("[", "").Replace("]", "");
+			var array = input.Split(',');
+			for (int i = 0; i < array.Length; i += 1)
+			{
+				if (array[i].Length > 0)
+					list.Add(int.Parse(array[i]));
+				else
+					list.Add(null);
 			}
 			return list.ToArray();
 		}
@@ -43,9 +60,7 @@ namespace leetcode
 
 	public class Log
 	{
-		public static void Print(bool s) => Console.WriteLine(s);
-		public static void Print(string s) => Console.WriteLine(s);
-		public static void Print(int s) => Console.WriteLine(s);
+		public static void Print(object s) => Console.WriteLine(s);
 
 		public static void Print(int[] arr)
 		{
