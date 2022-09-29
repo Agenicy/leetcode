@@ -22,25 +22,29 @@ namespace leetcode.Q658
 	{
 		public IList<int> FindClosestElements(int[] arr, int k, int x)
 		{
-			LinkedList<int> ret = new();
 			int place;
 			for (place = 0; place < arr.Length && x > arr[place]; place++) ;
 			int front = place - 1, rear = place;
 			for (int i = 0; i < k; i++)
 			{
 				if (rear == arr.Length)
-					ret.AddFirst(arr[front--]);
+					front--;
 				else if (front == -1)
-					ret.AddLast(arr[rear++]);
+					rear++;
 				else
 				{
 					if (x - arr[front] <= arr[rear] - x)
-						ret.AddFirst(arr[front--]);
+						front--;
 					else
-						ret.AddLast(arr[rear++]);
+						rear++;
 				}
 			}
-			return ret.ToList();
+			List<int> ret = new(k);
+			for (int i = front + 1; i < rear; i++)
+			{
+				ret.Add(arr[i]);
+			}
+			return ret;
 		}
 	}
 }
