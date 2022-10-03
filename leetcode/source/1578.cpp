@@ -5,34 +5,24 @@ class Solution
 public:
     int minCost(string colors, vector<int> &neededTime)
     {
-        int max = 0;
+        int maxNum = 0;
         int sum = 0;
-        bool isAdding = false;
 
         for (size_t i = 1; i < colors.length(); i++)
         {
             /* code */
             if (colors[i] == colors[i - 1])
             {
-                if (!isAdding)
+                if (maxNum == 0)
                 {
-                    isAdding = true;
-                    max = neededTime[i - 1];
+                    maxNum = neededTime[i - 1];
                 }
 
-                if (neededTime[i] > max)
-                {
-                    sum += max;
-                    max = neededTime[i];
-                }
-                else
-                {
-                    sum += neededTime[i];
-                }
-                isAdding = true;
+                sum += min(neededTime[i], maxNum);
+                maxNum = max(neededTime[i], maxNum);
             }
             else
-                isAdding = false;
+                maxNum = 0;
         }
         return sum;
     }
