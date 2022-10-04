@@ -14,6 +14,7 @@
 #include <climits>
 #include <set>
 #include <unordered_set>
+#include<bitset>
 using namespace std;
 
 struct ListNode
