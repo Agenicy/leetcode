@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace leetcode.Q
+namespace leetcode.Q653
 {
 	public class Program
 	{
@@ -16,5 +16,24 @@ namespace leetcode.Q
 	}
 	public class Solution
 	{
+		public bool FindTarget(TreeNode root, int k)
+		{
+
+			HashSet<int> visited = new();
+
+			bool Inplace(TreeNode ptr)
+			{
+				if (visited.Contains(k - ptr.val))
+					return true;
+				visited.Add(ptr.val);
+
+				if (ptr.left != null)
+					if(Inplace(ptr.left)) return true;
+				if (ptr.right != null)
+					if (Inplace(ptr.right)) return true;
+				return false;
+			}
+			return Inplace(root);
+		}
 	}
 }
