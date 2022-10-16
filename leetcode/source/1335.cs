@@ -28,65 +28,34 @@ namespace leetcode.Q1335
 			if (d > jobDifficulty.Length) return -1;
 			else if (d == jobDifficulty.Length) return jobDifficulty.Sum();
 
-			int hidden = jobDifficulty.Length - d;
-			(int, int)[][] utility = // (sum, max)
-				Enumerable.Range(0, jobDifficulty.Length)
-				.Select(x => Enumerable.Repeat((-1, -1), hidden + 1).ToArray()).ToArray();
-
-
 			/*
-			 * DP(ind, left) = (left <= 0)? Utility(x) + DP(x+1, 0):
-			 *		Min( Utility(x) + DP(x+1, hidden-1), DP(x+1, hidden) )
-			 * 
-			 * Utility(ind) = IsHidden(ind)? Min( Utility(ind) , Utility(ind-1) ): Utility(ind)
+			 *	DFS(param int[] jobs)
+			 *		int group = foreach i in range(len(jobs))
+			 *			return Max(x => jobs[x]) + DFS(group+1: jobs_left)
 			 */
-			utility[0][0] = (jobDifficulty[0], jobDifficulty[0]);
+			int[][] max = 
+				Enumerable.Range(0, jobDifficulty.Length)
+				.Select(x=>Enumerable.Repeat((int)short.MaxValue, d).ToArray()).ToArray();
 
-			int Util(int ind, int isHidden)
+			max[0][0] = jobDifficulty[0];
+			for (int i = 1; i < jobDifficulty.Length; i++)
 			{
-				if (ind < 0)
-					return 0;
-				else if (isHidden > ind)
-					return short.MaxValue;
-				else if (utility[ind][isHidden].Item1 != -1)
-					return utility[ind][isHidden].Item1;
-				else if (isHidden == 0) // not hid
-				{
-					utility[ind][isHidden].Item2 = jobDifficulty[ind];
-					return utility[ind][isHidden].Item1 = jobDifficulty[ind] + Util(ind - 1, 0);
-				}
-
-				// count value = take or not take
-				int take = Util(ind - 1, isHidden) + jobDifficulty[ind];
-
-				int hide = Util(ind - 1, isHidden - 1);
-				// hide
-				int bias = jobDifficulty[ind] - utility[ind - 1][isHidden - 1].Item2;
-				if (bias > 0)
-				{
-					utility[ind][isHidden].Item2 = jobDifficulty[ind];
-					hide += bias;
-				}
-				else
-				{
-					utility[ind][isHidden].Item2 = utility[ind - 1][isHidden - 1].Item2;
-				}
-
-				if (take < hide)
-				{
-					utility[ind][isHidden].Item2 = jobDifficulty[ind];
-					return utility[ind][isHidden].Item1 = take;
-				}
-				else
-				{
-					return utility[ind][isHidden].Item1 = hide;
-				}
-				
+				max[i][0] = Math.Max(jobDifficulty[i], max[i - 1][0]);
 			}
 
-			int ret = Util(jobDifficulty.Length-1, hidden);
-			return ret;
-
+			for (int i = 1; i < jobDifficulty.Length; i++) // row
+			{
+				for (int j = 1; j < Math.Min(i + 1, d); j++) // col
+				{
+					int max_now = jobDifficulty[i];
+					for (int k = i - 1; k >= 0; k--)
+					{
+						max[i][j] = Math.Min(max[i][j], max_now + max[k][j - 1]);
+						max_now = Math.Max(jobDifficulty[k], max_now);
+					}
+				}
+			}
+			return max[jobDifficulty.Length - 1][d - 1];
 		}
 	}
 }
