@@ -19,14 +19,20 @@ namespace leetcode.Q645
 	{
 		public int[] FindErrorNums(int[] nums)
 		{
-			return new[]
+			int i = 0;
+			while (i < nums.Length)
 			{
-				nums.GroupBy(x => x)
-					.Where(x => x.Count() == 2)
-					.Select(x => x.Key)
-					.First(),
-				Enumerable.Range(1, nums.Length).Except(nums).First()
-			};
+				if (nums[i] == nums[nums[i] - 1])
+					++i;
+				else
+					(nums[i], nums[nums[i] - 1]) = (nums[nums[i] - 1], nums[i]);
+			}
+			for (i = 0; i < nums.Length; i++)
+			{
+				if (nums[i] != i + 1)
+					return new[] { nums[i], i + 1 };
+			}
+			return null;
 		}
 	}
 }
