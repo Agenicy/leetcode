@@ -20,49 +20,50 @@ namespace leetcode.Q1293
 	}
 	public class Solution
 	{
-		class Node
-		{
-			public int x, y;
-			public int step = 0;
-			public int breakLeft = 0;
-			public Node(int x, int y, int step, int breakLeft)
-			{
-				this.x = x; this.y = y;
-				this.step = step;
-				this.breakLeft = breakLeft;
-			}
-			public override int GetHashCode()
-			{
-				return (x, y, breakLeft).GetHashCode();
-			}
-		}
-
 		public int ShortestPath(int[][] grid, int k)
 		{
-			int xMax = grid.Length;
-			int yMax = grid[0].Length;
-			PriorityQueue<Node, Node> FS = new(Comparer<Node>.Create((x, y) => -(x.x + x.y).CompareTo(y.x + y.y)));
-			PriorityQueue<Node, Node> BS = new(Comparer<Node>.Create((x, y) => (x.x + x.y).CompareTo(y.x + y.y)));
-			Node head = new Node(0, 0, 0, (k + 1) / 2);
-			Node tail = new Node(xMax - 1, yMax - 1, 0, k / 2);
-			FS.Enqueue(head, head);
-			BS.Enqueue(tail, tail);
-			HashSet<Node> visited = new();
-
-			while (FS.Count > 0 && BS.Count > 0)
+			int m = grid.Length, n = grid[0].Length;
+			if (k > (m - 1 + n - 1))
 			{
+				return m - 1 + n - 1;
+			}
+			var q = new Queue<(int, int, int, int)>(); // i, j, distance, remaining steps to break 1
+			var seen = new HashSet<(int, int, int)>();  // i, j, remaining steps to break 1
+			q.Enqueue((0, 0, 0, k));
+			seen.Add((0, 0, k));
+
+			int res = -1;
+
+			while (q.Count > 0)
+			{
+				var (i, j, dist, steps) = q.Dequeue();
+				if (i == m - 1 && j == n - 1)
 				{
-					Node next = FS.Dequeue();
-					foreach ((int xb, int yb) in new[] { (0, 1), (0, -1), (1, 0), (-1, 0) })
+					if (res == -1 || dist < res)
 					{
-						int xs = next.x + xb;
-						int ys = next.y + yb;
-						if (0 <= xs && xs < xMax && 0 <= ys && ys < yMax)
+						res = dist;
+					}
+				}
+				foreach (var (di, dj) in new List<(int, int)> { (0, -1), (0, 1), (-1, 0), (1, 0) })
+				{
+					int ni = i + di, nj = j + dj;
+					if (ni >= 0 && ni < grid.Length && nj >= 0 && nj < grid[0].Length)
+					{
+						if (grid[ni][nj] == 0 && !seen.Contains((ni, nj, steps)))
 						{
+							q.Enqueue((ni, nj, dist + 1, steps));
+							seen.Add((ni, nj, steps));
+						}
+						if (grid[ni][nj] == 1 && steps > 0 && !seen.Contains((ni, nj, steps - 1)))
+						{
+							q.Enqueue((ni, nj, dist + 1, steps - 1));
+							seen.Add((ni, nj, steps - 1));
 						}
 					}
 				}
 			}
+
+			return res;
 		}
 	}
 }
