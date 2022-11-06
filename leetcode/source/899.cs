@@ -20,22 +20,17 @@ namespace leetcode.Q899
 	{
 		public string OrderlyQueue(string s, int k)
 		{
-			LinkedList<char> str = new LinkedList<char>(s);
-			StringBuilder sb = new StringBuilder();
-			while(str.Count > 0)
+			if(k == 1)
 			{
-				LinkedListNode<char> min = str.First;
-				LinkedListNode<char> now = str.First.Next;
-				for (int i = 1; i < k & now != null; i++)
-				{
-					if (now.Value < min.Value)
-						min = now;
-					now = now.Next;
-				}
-				sb.Append(min.Value);
-				str.Remove(min);
+				string str = s + s;
+				return Enumerable.Range(0, s.Length).Min(x => str.Substring(x, s.Length));
 			}
-			return sb.ToString();
+			else
+			{
+				char[] str = s.ToCharArray();
+				Array.Sort(str);
+				return new string(str);
+			}
 		}
 	}
 }
