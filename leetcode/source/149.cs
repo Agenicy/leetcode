@@ -19,7 +19,7 @@ namespace leetcode.Q149
 	{
 		public int MaxPoints(int[][] points)
 		{
-			int max = 0;
+			int max = 1;
 
 			for (int i = 0; i < points.Length; i++)
 			{
