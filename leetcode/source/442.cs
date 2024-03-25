@@ -19,23 +19,28 @@ namespace leetcode.Q442
 	{
 		public IList<int> FindDuplicates(int[] nums)
 		{
-			HashSet<int> set = new();
-			Dictionary<int, int> dict = new();
+			IList<int> result = new List<int>();
+
 			foreach (int num in nums)
 			{
-				if (!dict.ContainsKey(num))
-					dict[num] = 1;
-				else if (dict[num] < 3)
+				int index = System.Math.Abs(num) - 1;
+				if (nums[index] < 0)
 				{
-					dict[num]++;
-
-					if (dict[num] == 2)
-						set.Add(num);
-					else if (dict[num] == 3)
-						set.Remove(num);
+					result.Add(index + 1);
+				}
+				else
+				{
+					nums[index] = -nums[index];
 				}
 			}
-			return set.ToList();
+
+			foreach (int num in nums)
+			{
+				int index = System.Math.Abs(num) - 1;
+				nums[index] = -nums[index];
+			}
+
+			return result;
 		}
 	}
 }
